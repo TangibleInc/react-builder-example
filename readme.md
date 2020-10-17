@@ -6,11 +6,30 @@ Example of building a React fullstack application or static site
 
 [Node.js](https://nodejs.org/en/) must be installed, with its package manager, `npm`.
 
+## Create
+
+To create a new project based on this example, clone this repository and give it a new name.
+
+```sh
+git clone --depth 1 https://github.com/TangibleInc/react-builder-example app-name
+```
+
+Go into the created project, and remove the `.git` folder.
+
+```sh
+cd app-name
+rm -rf .git
+```
+
+Run `git init` to start a new repository as needed.
+
+
 ## Install
 
 ```sh
 npm install
 ```
+
 
 ## Develop
 
@@ -68,9 +87,13 @@ This project includes `pm2.config.js`, and NPM scripts in `package.json` to star
 
 Copy the file `.env.development` to `.env.production`.
 
-The latter will define environment variables for the production server, and is excluded from Git.
+```sh
+cp .env.development .env.production
+```
 
-The env file for `development` is used for local development. Define all environment variables required by the application server.
+The `development` env file is used for local development. Define all environment variables required by the application server.
+
+The `production` env file must define the same set of environment variables for the production server. It is excluded from Git.
 
 ### Build
 
