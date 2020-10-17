@@ -24,9 +24,8 @@ const config = {
 // Shortcut for import React from 'react'
 global.React = React
 
-const renderer = createRenderer(config)
-
 const app = express()
+const renderer = createRenderer(config)
 
 app
   .disable('x-powered-by')
