@@ -1,0 +1,9 @@
+/build
+/deploy
+/.env.production
+
+node_modules
+*.log
+*.local.js
+package-lock.json
+yarn.lock

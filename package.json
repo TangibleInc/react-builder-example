@@ -1,0 +1,29 @@
+{
+  "name": "react-builder-example",
+  "description": "Example of building a React fullstack application or static site",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "dev": "react-builder dev",
+    "build": "react-builder build && cp .env.* build && cp package.json build && cp pm2.config.js build",
+    "export": "react-builder export",
+    "try": "NODE_ENV=production node build/server.js",
+    "deploy": "if [ -f deploy ]; then ./deploy; else echo 'Deploy file not found'; fi",
+    "prep": "NODE_ENV=production npm install",
+    "start": "NODE_ENV=production pm2 start pm2.config.js",
+    "restart": "NODE_ENV=production pm2 restart pm2.config.js",
+    "stop": "NODE_ENV=production pm2 delete pm2.config.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "medux": "^1.1.7",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-helmet-async": "^1.0.7",
+    "react-router-dom": "^5.2.0"
+
+  },
+  "devDependencies": {
+    "@tangible/react-builder": "1.x"
+  }
+}
