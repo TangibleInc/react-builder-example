@@ -8,8 +8,8 @@ import routes from './routes'
 import renderRoutes from './utils/renderRoutes'
 
 const meta = {
-  defaultTitle: 'Static starter',
-  titleTemplate: '%s | Static starter',
+  defaultTitle: 'React builder example',
+  titleTemplate: '%s | React builder example',
   htmlAttributes: { lang: 'en' },
   meta: [
     { name: 'description', content: '' }
