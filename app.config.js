@@ -52,25 +52,16 @@ module.exports = async function() {
       return map
     }, {})
 
-    const createChunksString = type => map => Object.keys(map).map(route =>
-      type==='client'
-
-        // Client - Dynamic import
-        ? `'${route}': load(() => import(/* webpackChunkName: "${route}" */ '${
-          exportedMap[route].file
-        }'))`
-
-        // Server - Require (and bundle all)
-        : `'${route}': load('${route}', require('${
-          exportedMap[route].file
-        }'))`
-
-    ).join(',\n  ')
-
-    // console.log(chunks)
+    /**
+     * Client - Dynamic import
+     */
 
     const chunksClient = path.join(routesDir, 'chunks.client.js')
-    const createClientChunks = createChunksString('client')
+    const createClientChunks = map => Object.keys(map).map(route =>
+      `'${route}': load(() => import(/* webpackChunkName: "${route}" */ '${
+        exportedMap[route].file
+      }'))`
+    ).join(',\n  ')
 
     await fs.writeFile(chunksClient, `// Generated - Client-side routes
 
@@ -81,9 +72,16 @@ export default {
 }
 `, 'utf8')
 
+    /**
+     * Server - Require and bundle all
+     */
 
     const chunksServer = path.join(routesDir, 'chunks.server.js')
-    const createServerChunks = createChunksString('server')
+    const createServerChunks = map => Object.keys(map).map(route =>
+      `'${route}': load('${route}', require('${
+        exportedMap[route].file
+      }'))`
+    ).join(',\n  ')
 
     await fs.writeFile(chunksServer, `// Generated - Server-side routes
 
@@ -101,7 +99,9 @@ export default {
 
   if (process.env.NODE_ENV!=='development') return
 
-  // Dev mode - Watch files and regenerate routes
+  /**
+   * Dev mode - Watch files and regenerate routes
+   */
 
   // https://github.com/paulmillr/chokidar#api
   const watchOptions = {
@@ -116,9 +116,6 @@ export default {
   const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
 
   chokidar.watch(
-
-    // `${pagesDir}/**/*` // Watch folders also
-
     indexGlob,
     watchOptions
   )
