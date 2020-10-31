@@ -71,7 +71,7 @@ Example:
 ```sh
 #!/bin/bash
 
-rsync -vrlptz --delete ./build/public/ user@server:apps/static-site
+rsync -vrlptz --delete ./build/public/ user@server:apps/app-name
 ```
 
 Note the trailing `/` which is required for the source.
@@ -123,13 +123,13 @@ Follow the same step as a static site, and create a `deploy` script.
 Change the rsync source to the whole `build` folder, to sync client and server.
 
 ```sh
-rsync -vrlptz --delete ./build/ user@server:apps/static-site
+rsync -vrlptz --delete ./build/ user@server:apps/app-name
 ```
 
 Then add a line to restart the application after deploy.
 
 ```sh
-ssh user@server "cd ~/apps/static-site && npm run restart"
+ssh user@server "cd ~/apps/app-name && npm run restart"
 ```
 
 Run the following to deploy after build.
